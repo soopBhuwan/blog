@@ -1,0 +1,157 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock title%}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{%static '/css/navBar.css'%}">
+    <link rel= "stylesheet" href= "{%static '/css/footer.css'%}">
+    <link rel= "shortcut icon" href = "{%static '/images/favicon.ico'%}">
+    <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+    {%block head%}
+    {%endblock head%}
+
+</head>
+<body>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            overflow-x: hidden; 
+        }
+        .one,.two,.three,.four{
+            height: 100vh;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            scroll-snap-align:start;
+        }
+        .main-body{
+            scroll-snap-type: y proximity;
+            overflow-y:scroll;
+            height : 100vh;
+        }
+        .one{
+            background: red;
+            height: 20vh;
+        }
+        .two{
+            background: blue;
+            height:100vh;
+        }
+        .three{
+            height:100vh;
+        }
+        .four{
+            background: grey;
+            height: 100vh;
+        }
+        .hide-content{
+            display:hidden;
+        }
+    </style>
+   
+            <!--navigation bar for the website-->
+            <nav>
+                <div class = "logo font-effect-3d">
+                    <h4>Chronon</h4>
+
+                </div>
+                <ul class = 'nav-links'>
+                    <li><a href = "{%url 'blog:general-page'%}">Home</a></li>
+                    <li><a href = "#bottom">About</a></li>
+                    {%if request.user.is_authenticated%}
+                        <li><a href = "{%url 'blog:logout'%}">Logout</a></li>
+                        <li><a href="{%url 'blog:dashboard'%}">Dashboard</a></li>
+                    {%else%}
+                        <li><a href = "{%url 'blog:login'%}">Login</a></li>
+                        <li><a href = "{%url 'blog:register'%}">Register</a></li>
+                    {%endif%}
+                </ul>
+                <div class = 'burger'>
+                    <div class = 'line1'></div>
+                    <div class = "line2"></div>
+                    <div class = "line3"></div>
+                </div>
+            </nav>
+        <div class = 'content-area' >
+            {%block side%}
+            {%endblock side%}
+            {%block content%}
+        
+            {%endblock%}
+        
+        </div>
+            
+       
+      
+                <!--addition of footer-->
+            <div class = 'footer-body'>
+                <a name='bottom'></a>
+                <footer>
+                    <div class="footer-container">
+                        <div class="sec aboutus">
+                            <h2>About us</h2>
+                            <p>Chronon blog is a blog dedicated for sharing experience and knowledge by teenagers.</p>
+                        </div>
+                        <ul class="sci">
+                            <li><a href='https://www.facebook.com' target= '_blank'><i class="lni lni-facebook-original"></i></a></li>
+                            <li><a href='https://www.twitter.com' target= "_blank"><i class="lni lni-twitter-original"></i></a></li>
+                            <li><a href='https://wwww.instagram.com' target= '_blank'><i class="lni lni-instagram-original"></i></a></li>
+                            <li><a href='https://www.youtube.com' target = "_blank"><i class="lni lni-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="sec quickLinks">
+                        <h2 class = 'borderLine'>Quick Links</h2>
+                        <ul>
+                            <li><a href="#">Back to top</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Help</a></li>
+                            <li><a href="#">Terms and Conditions</a></li>
+                        </ul>
+                    </div>
+                    <div class="sec contact">
+                        <h2 class = "borderLine">Contact Info</h2>
+                        <ul class="info">
+                            <li>
+                                <span><i class="lni lni-phone"></i></span>
+                            <p><a href="tel: +977100">+977984372914</a></p>
+                            <li>
+                                <span><i class="lni lni-map-marker"></i></span>
+                                <span>Province no.5<br>
+                                    Rupandehi<br> Nepal</span>
+                            </li>
+                            <li>
+                                <span><i class="lni lni-envelope"></i></span>
+                                <span>
+                                    <p><a href="email:atomisbrogile@gmail.com">atomisbrogile@gmail.com</a></p>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </footer>
+                <div class="copyrightText" style='color:white;'><p>
+                    Copyright @2021 Bhuwan Bhandari. All Rights Reserved.
+                </p></div>
+            </div>
+      
+    </div>
+    
+   
+
+    <!--for bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src = "{%static '/js/app.js'%}"></script>
+    
+</body>
+</html>

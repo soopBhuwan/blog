@@ -1,0 +1,47 @@
+
+{%extends "blog/base.html"%}
+{%load static%}
+{%block title%}Details{%endblock title%}
+{%block head%}
+<link rel = "stylesheet" href =" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<link rel = "stylesheet" href = "{%static 'css/postDetail.css'%}">
+
+{%endblock head%}
+{%block content%}
+<style>
+  .card-title::first-letter{
+    text-transform: capitalize;
+
+  }
+  .card-subtitle::first-letter{
+    text-transform: capitalize;
+  }
+  .card-text::first-letter{
+    text-transform: uppercase;
+  }
+  .post-author::first-letter{
+    text-transform: uppercase;
+    color:black;
+  }
+</style>
+<div class="card" style="width: 90vw;">
+    <img class="card-img-top" src="{%static 'images/oo.jpg'%}" alt=" image cap">
+    <div class="card-body">
+      <h2 class="card-title">{{post.title}}</h2>
+      <h4 class= 'card-subtitle'>{{post.subtitle}}</h4>
+      <p class="card-text">
+        {{post.content}}
+      </p>
+      
+     <p>
+       {%if post.author%}
+          <h6 class='post-author'>Author : {{post.author}}</h6>
+        {%else%}
+          <h6 class= 'post-author'>Author : unknown</h6>
+        {%endif%}
+              <a href="#"><a href="{%url 'blog:general-page'%}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">More posts --></a></a>
+     </p>
+    </div>
+  </div>
+
+{%endblock content%}

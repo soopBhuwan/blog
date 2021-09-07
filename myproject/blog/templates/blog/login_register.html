@@ -1,0 +1,81 @@
+{%extends 'blog/base.html'%}
+{%load static%}
+{%block content%}
+
+    <style>
+        .login--wrapper{
+           display:flex;
+           justify-content:space-around;
+           align-items:center;
+           align-content: center;
+           height: 80vh;
+           width: 80vw;
+           padding: 50px;
+        }
+        .form{
+            width: 600px; 
+        }
+        h1,.btn{
+          margin-bottom: 2vh;
+        }
+        .btn{
+          margin-top: 2vh;
+        }
+        body{
+          background-color:#071c27; 
+          color:white;
+        }
+ 
+    </style>
+
+    <div class ="login-container ">
+        <div class='login--wrapper'>
+            {%if page == 'login'%}
+              <form class= 'form' method='post'>
+                  {%csrf_token%}
+                  <h1 class='text-center'>Login</h1>
+                  
+                  <div class="form-group">
+                    <label  class= 'text-sm-10' for="exampleInputEmail1">Username</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="Enter email">
+                  
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <p>Don't have a account?<a href="{% url 'blog:register'%}"> Register</a></p>
+                </form>
+                {%for message in messages%}
+                  <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                      {{ message }}
+                </div>
+                {%endfor%}
+                    
+            {%else%}
+              <form method = "post">
+                  <h1>Register</h1>
+                  {%csrf_token%}
+                  {%for field in form%}
+                      <label for = "ExampleInputPassword" class = 'form-label form-control-sm form-group' style='font-size: 20px;'>{{field.label}}:</label>
+                      {{field}}
+
+                  {%endfor%}
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                      {%for message in messages%}
+                        <div class="alert alert-success">
+                          <a class="close" href="#" data-dismiss="alert">×</a>
+                            {{ message }}
+                        </div>
+                    {%endfor%}
+                    
+                <p>Already have a account?<a href="{% url 'blog:login'%}"> Login</a></p>
+              </form>
+            {%endif%}
+          </div>
+      </div>
+      
+{%endblock content%}

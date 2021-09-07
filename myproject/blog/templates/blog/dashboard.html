@@ -1,0 +1,78 @@
+{%extends 'blog/base.html'%}
+{%block side%}
+    <div class="col-sm-2 text-black my-5 text-center">
+        <h4 class="my-5">Your profile</h4>
+        <img src="https://img.icons8.com/ios/50/000000/name--v1.png"/>
+        <h3>{{full_name}}</h3>
+
+    </div>
+{%endblock side%}
+{%block content%}
+<style>
+    .col-sm-10,h1{
+        margin: auto;
+    }
+    .button{
+        background-color: aliceblue;
+    }
+    a{
+        text-decoration: none;
+    }
+    body{
+        background-color:rgb(221,218,240);
+    
+    }
+</style>
+<h1 class = 'text-center'>Dashboard Page</h1>
+{%if posts%}
+
+    <div class="col-sm-10 text-center" style='margin-top:4vh;'>
+       
+        <a href="{%url 'blog:create-post'%}" class= 'btn btn-sucess button'>Add post</a>
+        <h4 class="text-center alert alert-info mt-3">
+            Show post information:
+        </h4>
+        <table class="table table-hover" style='background-color:aliceblue;'>
+            <thead>
+                <tr class="text-center">
+                   
+                    <th scope= 'col' style = 'width:28vw;'> Post Title</th>
+                    <th scope = 'col' style = 'width: 20vw;'>Edit</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {%for post in posts%}
+                <tr>
+                   
+                    <td><a href= "{%url 'blog:detail' post.id%}">{{post.title}}</a></td>
+                    
+                    <td class="text-center">
+                        <a href = '{%url 'blog:edit-post' post.id%}'>
+                            <button type="button" class="btn btn-dark">Edit</button>
+                            
+                        </a>
+                        {%if perms.blog.delete_post%}
+                            <form action="{%url 'blog:delete-post' post.id%}" method = 'post' class = 'd-inline'>
+                                {%csrf_token%}
+                                <input type = "submit" class = 'btn btn-danger btn-sm' value = 'Delete'>
+                            </form>
+                        
+                        {%endif%}
+                      
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+       
+    </div>
+{%else%}
+    <div class="col-sm-10 text-center">    
+        <h4 class = "text-center alert alert-warning">No Records</h4>
+        <a href="{%url 'blog:create-post'%}" class= 'btn btn-sucess button text-center' style = 'background-color:aliceblue;margin:auto;'>Add post</a>
+    </div>
+{%endif%}
+  
+   
+{%endblock content%}

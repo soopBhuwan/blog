@@ -1,0 +1,30 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+.card{
+    margin:auto;
+}
+.content-area{
+    min-height: 75vh;
+    padding: auto;
+}
+.card-subtitle{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+.card{
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+}
+@media only screen and (min-width: 900px){
+    img{
+        width: 75vw;
+        height: 50vh;
+    }
+    .cap{
+        height: 50vh;
+        width: 80vw;
+    }
+}
